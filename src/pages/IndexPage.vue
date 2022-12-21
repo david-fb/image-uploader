@@ -1,24 +1,24 @@
 <template>
-  <q-page class="flex flex-center">
-    <button @click="handleSignOut">Log out</button>
+  <q-page class="flex column main">
+    <ImageUploader />
+    <ImageGrid />
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
-import { signOut } from "firebase/auth";
+import ImageUploader from "../components/ImageUploader.vue";
+import ImageGrid from 'src/components/ImageGrid.vue';
 
 export default defineComponent({
   name: 'IndexPage',
-  methods: {
-    handleSignOut(){
-      signOut(this.$auth).then(() => {
-        this.$router.push('login');
-        console.log("Logged Out ok");
-      }).catch((error) => {
-        console.error("something went wrong", error);
-      })
-    },
-  }
+  components: {ImageUploader, ImageGrid},
 });
 </script>
+<style lang="scss" scoped>
+.main {
+  gap: 20px;
+  padding-bottom: 30px;
+  align-items: center;
+}
+</style>
