@@ -39,5 +39,8 @@ export const useImagesStore = defineStore('images', {
     removeImage(imageUrl) {
       this.images = this.images.filter((image) => image.url !== imageUrl);
     },
+    clearImages() {
+      this.images = [];
+    },
   },
 });

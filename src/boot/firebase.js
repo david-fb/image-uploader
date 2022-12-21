@@ -19,13 +19,17 @@ export default boot(({ app }) => {
   app.config.globalProperties.$firebaseApp = initializeApp(firebaseConfig);
   app.config.globalProperties.$auth = getAuth(app.config.globalProperties.$firebase);
 
-  onAuthStateChanged(app.config.globalProperties.$auth, (user) => {
+  onAuthStateChanged(app.config.globalProperties.$auth, async (user) => {
     const userState = useUserStore();
+
     if (user) {
       const userName = app.config.globalProperties.$auth.currentUser.displayName;
       userState.login(userName);
     } else {
+      const { useImagesStore } = await import('src/stores/images-store');
+      const imageState = useImagesStore();
       userState.logout();
+      imageState.clearImages();
     }
   });
 });
