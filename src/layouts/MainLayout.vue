@@ -3,8 +3,8 @@
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title> Image Uploader </q-toolbar-title>
-
-        <EssentialLink v-for="link in essentialLinks" :key="link.title" v-bind="link" />
+        <q-toolbar-title>{{userState.getName}}</q-toolbar-title>
+        <SignOutButton />
       </q-toolbar>
     </q-header>
 
@@ -16,27 +16,19 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
-import EssentialLink from 'components/EssentialLink.vue';
-
-const linksList = [
-  {
-    title: 'Iniciar Sesión',
-    icon: 'login',
-    link: '/login',
-  },
-];
+import { useUserStore } from 'src/stores/user-store';
+import SignOutButton from 'src/components/SignOutButton.vue';
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    EssentialLink,
+    SignOutButton,
   },
 
-  setup() {
-    return {
-      essentialLinks: linksList,
-    };
+  computed: {
+    userState(){ return useUserStore() },
   },
+
 });
 </script>
