@@ -2,6 +2,7 @@ import { boot } from 'quasar/wrappers';
 
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useUserStore } from 'src/stores/user-store';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -19,11 +20,12 @@ export default boot(({ app }) => {
   app.config.globalProperties.$auth = getAuth(app.config.globalProperties.$firebase);
 
   onAuthStateChanged(app.config.globalProperties.$auth, (user) => {
+    const userState = useUserStore();
     if (user) {
-      console.log('logged in');
-      console.log(app.config.globalProperties.$auth.currentUser.displayName);
+      const userName = app.config.globalProperties.$auth.currentUser.displayName;
+      userState.login(userName);
     } else {
-      console.log('logged out');
+      userState.logout();
     }
   });
 });
