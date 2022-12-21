@@ -1,33 +1,26 @@
 <template>
-  <q-page class="flex flex-center">
-    <h1>Login</h1>
-    <button @click="Google">Log in</button>
+  <q-page class="flex column items-center justify-start container">
+    <SignInSignUp />
+    <LoginGoogle />
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import SignInSignUp from 'src/components/SignInSignUp.vue';
+import LoginGoogle from 'src/components/LoginGoogle.vue';
 
 export default defineComponent({
   name: 'LoginPage',
-  methods: {
-    Google() {
-      const provider = new GoogleAuthProvider();
-      signInWithPopup(this.$auth, provider)
-        .then((result) => {
-          const credential = GoogleAuthProvider.credentialFromResult(result);
-          const token = credential.accessToken;
-          const user = result.user;
-          this.$router.push('/');
-        })
-        .catch((err) => {
-          const errorCode = err.code;
-          const errorMessage = err.message;
-          const email = err.customData.email;
-          const credential = GoogleAuthProvider.credentialFromError(err);
-        });
-    }
-  }
+  components:{
+    SignInSignUp,
+    LoginGoogle,
+  },
 });
 </script>
+<style scoped>
+.container{
+  padding-top: 40px;
+  gap: 20px;
+}
+</style>
