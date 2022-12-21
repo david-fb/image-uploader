@@ -23,6 +23,7 @@
         icon="upload"
         label="Subir"
         @click="handleUploadImage"
+        :loading="loading"
       />
     </div>
   </section>
@@ -58,6 +59,7 @@ export default defineComponent({
     {
       file: null,
       url: null,
+      loading: false,
     }
 ),
   methods: {
@@ -71,14 +73,18 @@ export default defineComponent({
     handleUploadImage(){
       const imagePath = '/images/' + this.$auth.currentUser.uid + '/';
       const storageRef = ref(this.$firebaseStorage, imagePath + this.file.name);
-
+      this.loading = true;
       uploadBytes(storageRef, this.file).then(snapshot => {
         setTimeout(() =>{
           imagesState.fetchImages();
           this.showNotif('Imagen subida');
-        },500)
+          this.loading = false;
+        },1000)
         this.file = null;
         this.url = null;
+      }).catch(err => {
+        this.loading = false;
+        console.error(err);
       })
     },
   }
