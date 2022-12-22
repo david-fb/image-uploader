@@ -18,6 +18,7 @@
         fit="scale-down"
       />
       <q-btn
+        id="upload-image-button"
         :disable="url == null"
         color="primary"
         icon="upload"

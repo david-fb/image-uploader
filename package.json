@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
     "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
-    "test": "echo \"No test specified\" && exit 0"
+    "cypress:open": "cypress open --e2e  --browser chrome"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@quasar/app-vite": "^1.0.0",
     "autoprefixer": "^10.4.2",
+    "cypress": "^12.2.0",
     "dotenv": "^16.0.3",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.1.0",
