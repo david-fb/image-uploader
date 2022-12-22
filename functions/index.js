@@ -53,7 +53,7 @@ exports.optimizeImages = functions.storage.object().onFinalize(async (object) =>
     const resizesPromises = sizes.map((size) => {
       const thumbName = `${fileName}_${timestamp}_thumb_${size}${extendNameTransform}`;
       const thumbPath = join(workingDir, thumbName);
-      return sharp(destination).resize(size).png().toFile(thumbPath);
+      return sharp(destination, { failOnError: false }).rotate().resize(size).png().toFile(thumbPath);
     });
     await Promise.all(resizesPromises);
     console.log('generate resize image, done!');
