@@ -1,43 +1,47 @@
-# Quasar App (image-uploader)
+# Image Uploader
 
-A Quasar Project
+Optimize and resize images with sharp
 
-## Install the dependencies
+![Image Uploader App](https://raw.githubusercontent.com/david-fb/image-uploader/main/screenshot.png)
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables from Google Firebase to your .env file:
+
+```
+APIKEY=
+AUTHDOMAIN=
+PROJECTID=
+STORAGEBUCKET=
+MESSAGINGSENDERID=
+APPID=
+
+```
+
+## Installation
+
+Install project dependencies:
 
 ```bash
-yarn
-# or
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+Install firebase emulators
+
+```bash
+cd functions
+npm install
+```
+
+Run Firebase emulators:
+
+```bash
+cd functions
+firebase emulators:start
+```
+
+Run Quasar App:
 
 ```bash
 quasar dev
 ```
-
-### Lint the files
-
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-### Format the files
-
-```bash
-yarn format
-# or
-npm run format
-```
-
-### Build the app for production
-
-```bash
-quasar build
-```
-
-### Customize the configuration
-
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
